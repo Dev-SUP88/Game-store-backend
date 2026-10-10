@@ -9,13 +9,14 @@ import {
 } from 'drizzle-orm/mysql-core';
 import { sql } from 'drizzle-orm';
 import { gameAccounts } from './gameAccounts';
+import { binaryUuid } from './custom-types.ts';
 
 export const productImages = mysqlTable('product_images', {
-  id: binary('id', { length: 16 })
+  id: binaryUuid('id')
     .primaryKey(),
     
   // Foreign Key ชี้ไปที่ gameAccounts.id (BINARY 16)
-  account_id: binary('account_id', { length: 16 })
+  account_id: binaryUuid('id')
     .notNull()
     .references(() => gameAccounts.id, { onDelete: 'cascade' }),
     

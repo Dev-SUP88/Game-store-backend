@@ -11,17 +11,17 @@ import {
 import { sql } from 'drizzle-orm';
 import { users } from './users';
 import { gameAccounts } from './gameAccounts';
+import { binaryUuid } from './custom-types.ts';
 
 export const orders = mysqlTable('orders', {
-  id: binary('id', { length: 16 })
-    .primaryKey(),
+  id: binaryUuid('id').primaryKey(),
   order_no: varchar('order_no', { length: 50 }).notNull().unique(),
   
   // Foreign Keys (BINARY 16)
-  user_id: binary('user_id', { length: 16 })
+  user_id: binaryUuid('id')
     .notNull()
     .references(() => users.id, { onDelete: 'restrict' }),
-  account_id: binary('account_id', { length: 16 })
+  account_id: binaryUuid('id')
     .notNull()
     .references(() => gameAccounts.id, { onDelete: 'restrict' }),
     
