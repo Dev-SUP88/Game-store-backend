@@ -2,6 +2,7 @@ import { eq, and, ne, isNull } from "drizzle-orm";
 import { v7 as uuidv7 } from 'uuid';
 import { db } from "../config/db.ts";
 import { games } from "../db/schema/index.ts";
+import { AppError } from "../error/app-error.ts";
 
 export async function getAllGames() {
   return await db
@@ -21,7 +22,7 @@ export async function getGameById(id: string) {
     );
 
   if (!game) {
-    throw new Error("NOT_FOUND");
+    throw new AppError("NOT_FOUND");
   }
   
   return game;
@@ -39,7 +40,7 @@ export async function insertGame(input) {
     );
 
   if (existingGame) {
-    throw new Error("THIS GAME ALREADY EXISTS");
+    throw new AppError("THIS GAME ALREADY EXISTS");
   }
 
   const newId = uuidv7();
@@ -72,7 +73,7 @@ export async function updateGame(id: string, input: Partial<typeof games.$inferI
   );
 
   if(!existingGame) {
-    throw new Error("NOT_FOUND_GAME_ID_FOR_EDIT");
+    throw new AppError("NOT_FOUND_GAME_ID_FOR_EDIT");
   }
 
   if(input.name && input.name !== existingGame.name) {
@@ -88,7 +89,7 @@ export async function updateGame(id: string, input: Partial<typeof games.$inferI
     );
 
     if(duplicateName) {
-      throw new Error("THIS_GAME_NAME_IS_ ALREADY_IN_USE");
+      throw new AppError("THIS_GAME_NAME_IS_ ALREADY_IN_USE");
     }
   }
 
@@ -122,7 +123,7 @@ export async function softDeleteGame(id: string) {
   );
 
   if(!existingGame) {
-    throw new Error("NOT_FOUND_GAME_ID_FOR_DELETE");
+    throw new AppError("NOT_FOUND_GAME_ID_FOR_DELETE");
   }
 
   // 1. สั่ง Soft Delete (อัปเดต deletedAt)
