@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { ZodSchema } from "zod";
+import type { Request, Response, NextFunction } from "express";
+import type { ZodSchema } from "zod";
 
 export const validateBody = (schema: ZodSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -10,7 +10,10 @@ export const validateBody = (schema: ZodSchema) => {
       return res.status(400).json({
         success: false,
         message: "Validation Error",
-        errors: error.errors, // ส่งรายละเอียด error ของ Zod กลับไป
+        errors: error.issues.map((err) => ({
+        field: err.path.join('.'),
+        message: err.message,
+      })),
       });
     }
   };

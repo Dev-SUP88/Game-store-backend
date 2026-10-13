@@ -2,7 +2,7 @@ import { drizzle } from 'drizzle-orm/mysql2';
 import { sql } from 'drizzle-orm';
 import mysql from 'mysql2/promise';
 import { env } from '../config/env.ts';
-import * as schema from '../db/schema';
+import * as schema from '../db/schema/index.ts';
 
 export const dbPool = mysql.createPool({
   host: env.DB_HOST,

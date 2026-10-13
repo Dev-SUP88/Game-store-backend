@@ -8,7 +8,7 @@ import {
   index,
 } from 'drizzle-orm/mysql-core';
 import { sql } from 'drizzle-orm';
-import { gameAccounts } from './gameAccounts';
+import { gameAccounts } from './gameAccounts.ts';
 import { binaryUuid } from './custom-types.ts';
 
 export const productImages = mysqlTable('product_images', {

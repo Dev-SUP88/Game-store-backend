@@ -9,7 +9,7 @@ import {
   index,
 } from 'drizzle-orm/mysql-core';
 import { sql } from 'drizzle-orm';
-import { games } from './games';
+import { games } from './games.ts';
 import { binaryUuid } from './custom-types.ts';
 
 export const gameAccounts = mysqlTable('game_accounts', {

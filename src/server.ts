@@ -1,5 +1,5 @@
 import express from "express";
-import gameRouter from "./routes/game.ts";
+import gameRouter from "./routers/game.ts";
 import { errorHandler } from "./middlewares/error.ts";
 
 const app = express();

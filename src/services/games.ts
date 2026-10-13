@@ -22,7 +22,7 @@ export async function getGameById(id: string) {
     );
 
   if (!game) {
-    throw new AppError("NOT_FOUND");
+    throw new AppError("NOT_FOUND", 404);
   }
   
   return game;
@@ -40,7 +40,7 @@ export async function insertGame(input) {
     );
 
   if (existingGame) {
-    throw new AppError("THIS GAME ALREADY EXISTS");
+    throw new AppError("THIS GAME ALREADY EXISTS", 400);
   }
 
   const newId = uuidv7();
@@ -73,7 +73,7 @@ export async function updateGame(id: string, input: Partial<typeof games.$inferI
   );
 
   if(!existingGame) {
-    throw new AppError("NOT_FOUND_GAME_ID_FOR_EDIT");
+    throw new AppError("NOT_FOUND_GAME_ID_FOR_EDIT", 404);
   }
 
   if(input.name && input.name !== existingGame.name) {
@@ -89,7 +89,7 @@ export async function updateGame(id: string, input: Partial<typeof games.$inferI
     );
 
     if(duplicateName) {
-      throw new AppError("THIS_GAME_NAME_IS_ ALREADY_IN_USE");
+      throw new AppError("THIS_GAME_NAME_IS_ ALREADY_IN_USE", 400);
     }
   }
 
@@ -123,7 +123,7 @@ export async function softDeleteGame(id: string) {
   );
 
   if(!existingGame) {
-    throw new AppError("NOT_FOUND_GAME_ID_FOR_DELETE");
+    throw new AppError("NOT_FOUND_GAME_ID_FOR_DELETE", 404);
   }
 
   // 1. สั่ง Soft Delete (อัปเดต deletedAt)

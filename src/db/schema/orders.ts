@@ -9,8 +9,8 @@ import {
   index,
 } from 'drizzle-orm/mysql-core';
 import { sql } from 'drizzle-orm';
-import { users } from './users';
-import { gameAccounts } from './gameAccounts';
+import { users } from './users.ts';
+import { gameAccounts } from './gameAccounts.ts';
 import { binaryUuid } from './custom-types.ts';
 
 export const orders = mysqlTable('orders', {

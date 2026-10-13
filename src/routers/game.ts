@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as gameController from "../controllers/game.ts";
+import * as gameController from "../controllers/games.ts";
 import { validateBody } from "../middlewares/validate.ts";
 import { createGameSchema, updateGameSchema } from "../validators/game.ts";
 

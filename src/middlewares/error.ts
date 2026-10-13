@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { AppError } from "../error/app-error";
+import type { Request, Response, NextFunction } from "express";
+import { AppError } from "../error/app-error.ts";
 
 export function errorHandler(error: any, req: Request, res: Response, next: NextFunction) {
   // ถ้ารู้จัก Error นี้ (เป็น AppError ที่เรากำหนดเอง)

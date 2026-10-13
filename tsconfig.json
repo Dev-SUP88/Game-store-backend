@@ -9,6 +9,8 @@
     "moduleResolution": "nodenext",
     "target": "es2022",
     "types": ["node"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 
     /* Other Outputs */
     "sourceMap": true,
